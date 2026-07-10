@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.36631.11
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Geometry.Core", "Geometry.Core\Geometry.Core.vcxproj", "{4874896C-FDB5-43AD-B6EA-F1DC7DB8D868}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4874896C-FDB5-43AD-B6EA-F1DC7DB8D868}.Debug|x64.ActiveCfg = Debug|x64
+		{4874896C-FDB5-43AD-B6EA-F1DC7DB8D868}.Debug|x64.Build.0 = Debug|x64
+		{4874896C-FDB5-43AD-B6EA-F1DC7DB8D868}.Debug|x86.ActiveCfg = Debug|Win32
+		{4874896C-FDB5-43AD-B6EA-F1DC7DB8D868}.Debug|x86.Build.0 = Debug|Win32
+		{4874896C-FDB5-43AD-B6EA-F1DC7DB8D868}.Release|x64.ActiveCfg = Release|x64
+		{4874896C-FDB5-43AD-B6EA-F1DC7DB8D868}.Release|x64.Build.0 = Release|x64
+		{4874896C-FDB5-43AD-B6EA-F1DC7DB8D868}.Release|x86.ActiveCfg = Release|Win32
+		{4874896C-FDB5-43AD-B6EA-F1DC7DB8D868}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3C8DDB08-A4F4-473D-A463-9B1E39398F07}
+	EndGlobalSection
+EndGlobal
