@@ -1,6 +1,9 @@
 # Geometry Playground
 
 ### 컴퓨터비전에서 사용하는 모든 기하학을 직접 구현해보기
+<img width="776" height="535" alt="image" src="https://github.com/user-attachments/assets/b03a58dd-67bf-440d-8a66-4e857586474d" />
+
+Eigen3.4.1 설치 필요
 
 
 ```
