@@ -9,8 +9,8 @@
 Eigen3.4.1 설치 필요 <br>
 
 pch.h : `using namespace std;` , `C++ SLT` , `Eigen` 헤더 포함. <br>
-헤더(.h): using namespace 사용하지 않음. pch.h 넣지 않고 필요한것만 넣음<br>
-소스(.cpp): using namespace geometry; 사용.<br>
+헤더(.h): `using namespace` 사용하지 않음. `pch.h` 넣지 않고 필요한 것만 넣음<br>
+소스(.cpp): `using namespace geometry;` 사용.<br>
 Demo 및 테스트 코드: `using namespace geometry;`와 `using namespace Eigen;` 사용.<br>
 <br>
 
