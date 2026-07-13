@@ -1,9 +1,14 @@
 #include "pch.h"
 #include "Rotation.h"
 
-using namespace geometry;
+using namespace geocore;
 
-Eigen::Matrix3d Rotation::Rodrigues(const Eigen::Vector3d& axis, double angle)
+//using Eigen::Matrix3d;
+//using Eigen::Vector3d;
+//using Eigen::Vector2d;
+
+
+Eigen::Matrix3d geocore::Rodrigues(const Eigen::Vector3d& axis, double angle)
 {
 	//Matrix3d R = Matrix3d::Identity() + sin(angle) * K + (1 - cos(angle)) * K * K;
 	
@@ -20,9 +25,9 @@ Eigen::Matrix3d Rotation::Rodrigues(const Eigen::Vector3d& axis, double angle)
 }
 
 
-Eigen::Matrix3d Rotation::Skew(const Eigen::Vector3d& v)
+Eigen::Matrix3d geocore::Skew(const Eigen::Vector3d& v)
 {
-//a.cross(b) == Skew(a) * b 3차원 벡터 외적을 행렬곱으로 표현
+//	a.cross(b) == Skew(a) * b 3차원 벡터 외적을 행렬곱으로 표현
 //	SkewSymmetric Matrix
 //      ┌                 ┐
 //      │  0   -az   ay   │
@@ -38,7 +43,7 @@ Eigen::Matrix3d Rotation::Skew(const Eigen::Vector3d& v)
 	return K;
 }
 
-bool Rotation::IsRotationMatrix(const Eigen::Matrix3d& R)
+bool geocore::IsRotationMatrix(const Eigen::Matrix3d& R)
 {
 	Eigen::Matrix3d identity = Eigen::Matrix3d::Identity();
 

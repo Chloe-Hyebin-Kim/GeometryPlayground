@@ -13,7 +13,7 @@ int main()
 
 	double angle = 90.0 * pi / 180.0;
 
-	Eigen::Matrix3d R =	geometry::Rotation::Rodrigues(axis, angle);
+	Eigen::Matrix3d R = geocore::Rodrigues(axis, angle);
 
 	Eigen::Vector3d point(1.0, 0.0, 0.0);
 
@@ -28,7 +28,7 @@ int main()
 	cout << "Rotated Point\n";
 	cout << rotatedPoint.transpose() << "\n\n";
 
-	cout << "Is Rotation Matrix: " << boolalpha << geometry::Rotation::IsRotationMatrix(R)<< endl;
+	cout << "Is Rotation Matrix: " << boolalpha << geocore::IsRotationMatrix(R)<< endl;
 
 	return 0;
 }
