@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "Rotation.h"
 
-#include <cmath>
-
 using namespace geometry;
 
 Eigen::Matrix3d Rotation::Rodrigues(const Eigen::Vector3d& axis, double angle)
@@ -25,6 +23,7 @@ Eigen::Matrix3d Rotation::Rodrigues(const Eigen::Vector3d& axis, double angle)
 Eigen::Matrix3d Rotation::Skew(const Eigen::Vector3d& v)
 {
 //a.cross(b) == Skew(a) * b 3차원 벡터 외적을 행렬곱으로 표현
+//	SkewSymmetric Matrix
 //      ┌                 ┐
 //      │  0   -az   ay   │
 //K(a)= │ az    0   -ax   │

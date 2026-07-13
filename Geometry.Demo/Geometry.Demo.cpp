@@ -1,14 +1,34 @@
 ﻿// Geometry.Demo.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
 //
+#include "pch.h"
 
-#include <iostream>
+
 #include "Rotation.h"
 
 int main()
 {
-	double radian = geometry::DegreeToRadian(90.0);
+	constexpr double pi = 3.14159265358979323846;
 
-	std::cout << radian << std::endl;
+	Eigen::Vector3d axis(0.0, 0.0, 1.0);
+
+	double angle = 90.0 * pi / 180.0;
+
+	Eigen::Matrix3d R =	geometry::Rotation::Rodrigues(axis, angle);
+
+	Eigen::Vector3d point(1.0, 0.0, 0.0);
+
+	Eigen::Vector3d rotatedPoint = R * point;
+
+	cout << "Rotation Matrix\n";
+	cout << R << "\n\n";
+
+	cout << "Original Point\n";
+	cout << point.transpose() << "\n\n";
+
+	cout << "Rotated Point\n";
+	cout << rotatedPoint.transpose() << "\n\n";
+
+	cout << "Is Rotation Matrix: " << boolalpha << geometry::Rotation::IsRotationMatrix(R)<< endl;
 
 	return 0;
 }
