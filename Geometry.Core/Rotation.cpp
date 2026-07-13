@@ -29,11 +29,11 @@ Eigen::Matrix3d geocore::Skew(const Eigen::Vector3d& v)
 {
 //	a.cross(b) == Skew(a) * b 3차원 벡터 외적을 행렬곱으로 표현
 //	SkewSymmetric Matrix
-//      ┌                 ┐
-//      │  0   -az   ay   │
-//K(a)= │ az    0   -ax   │
-//      │-ay   ax    0    │
-//      └                 ┘
+//
+//      [ 0    -az   ay ]
+//K(a)= [ az    0   -ax ]
+//      [ -ay   ax   0  ]
+
 	Eigen::Matrix3d K;
 
 	K << 0.0, -v.z(), v.y(),
@@ -48,11 +48,9 @@ bool geocore::IsRotationMatrix(const Eigen::Matrix3d& R)
 	Eigen::Matrix3d identity = Eigen::Matrix3d::Identity();
 
 	Eigen::Matrix3d result = R.transpose() * R;
+	bool bOrthogonal = result.isApprox(identity, 1e-9);
+	bool bDdeterminant = abs(R.determinant() - 1.0) < 1e-9;
 
-	bool orthogonal = result.isApprox(identity, 1e-9);
-
-	bool determinant = abs(R.determinant() - 1.0) < 1e-9;
-
-	return orthogonal && determinant;
+	return bOrthogonal && bDdeterminant;
 
 }
