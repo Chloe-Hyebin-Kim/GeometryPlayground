@@ -4,6 +4,11 @@
 <img width="776" height="535" alt="image" src="https://github.com/user-attachments/assets/b03a58dd-67bf-440d-8a66-4e857586474d" />
 
 Eigen3.4.1 설치 필요
+pch.h : `using namespace std;` , `C++ SLT` , `Eigen 헤더'
+헤더(.h): using namespace 사용하지 않음. pch.h 넣지 않고 필요한것만 넣음
+소스(.cpp): using namespace geometry; 사용.
+Demo 및 테스트 코드: `using namespace geometry;`와 `using namespace Eigen;` 사용.
+
 
 
 ```
