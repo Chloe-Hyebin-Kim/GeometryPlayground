@@ -3,7 +3,16 @@
 ### 컴퓨터비전에서 사용하는 모든 기하학을 직접 구현해보기
 <img width="776" height="535" alt="image" src="https://github.com/user-attachments/assets/b03a58dd-67bf-440d-8a66-4e857586474d" />
 
-Eigen3.4.1 설치 필요
+<br>
+<br>
+
+Eigen3.4.1 설치 필요 <br>
+
+pch.h : `using namespace std;` , `C++ SLT` , `Eigen` 헤더 포함. <br>
+헤더(.h): `using namespace` 사용하지 않음. `pch.h` 넣지 않고 필요한 것만 넣음<br>
+소스(.cpp): `using namespace geometry;` 사용.<br>
+Demo 및 테스트 코드: `using namespace geometry;`와 `using namespace Eigen;` 사용.<br>
+<br>
 
 
 ```
