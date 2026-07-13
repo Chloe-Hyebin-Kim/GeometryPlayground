@@ -153,6 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DoubleMatrix.h" />
     <ClInclude Include="DoubleVector.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DoubleMatrix.cpp" />
     <ClCompile Include="DoubleVector.cpp" />
     <ClCompile Include="Geometry.Core.cpp" />
     <ClCompile Include="pch.cpp">
