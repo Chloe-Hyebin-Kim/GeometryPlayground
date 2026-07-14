@@ -95,6 +95,40 @@ Matrix2d geocore::Matrix2d::operator/(double scalar) const
 	//return Matrix2d(m[0] / scalar, m[1] / scalar, m[2] / scalar, m[3] / scalar);
 }
 
+Matrix2d geocore::Matrix2d::operator*(const Matrix2d& rhs) const
+{
+	Matrix2d result;
+
+	result(0, 0) = (*this)(0, 0) * rhs(0, 0) + (*this)(0, 1) * rhs(1, 0);
+	result(0, 1) = (*this)(0, 0) * rhs(0, 1) + (*this)(0, 1) * rhs(1, 1);
+	result(1, 0) = (*this)(1, 0) * rhs(0, 0) + (*this)(1, 1) * rhs(1, 0);
+	result(1, 1) = (*this)(1, 0) * rhs(0, 1) + (*this)(1, 1) * rhs(1, 1);
+
+	return result;
+}
+
+Matrix2d geocore::Matrix2d::Transpose() const
+{
+	Matrix2d result;
+
+	result(0, 0) = (*this)(0, 0);
+	result(0, 1) = (*this)(1, 0);
+	result(1, 0) = (*this)(0, 1);
+	result(1, 1) = (*this)(1, 0);
+
+	return result;
+}
+
+double geocore::Matrix2d::Determinant() const
+{
+	return (*this)(0, 0) * (*this)(1, 1) - (*this)(0, 1) * (*this)(1, 0);
+}
+
+Matrix2d geocore::Matrix2d::Identity()
+{
+	return Matrix2d(1.0, 0.0, 0.0, 1.0);
+}
+
 
 #pragma endregion Matrix2d
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -226,6 +260,66 @@ Matrix3d geocore::Matrix3d::operator/(double scalar) const
 	result.m[8] = m[8] / scalar;
 
 	return result;
+}
+
+Matrix3d geocore::Matrix3d::operator*(const Matrix3d& rhs) const
+{
+	Matrix3d result;
+
+	result(0, 0) = (*this)(0, 0) * rhs(0, 0) + (*this)(0, 1) * rhs(1, 0) + (*this)(0, 2) * rhs(2, 0);
+	result(0, 1) = (*this)(0, 0) * rhs(0, 1) + (*this)(0, 1) * rhs(1, 1) + (*this)(0, 2) * rhs(2, 1);
+	result(0, 2) = (*this)(0, 0) * rhs(0, 2) + (*this)(0, 1) * rhs(1, 2) + (*this)(0, 2) * rhs(2, 2);
+
+	result(1, 0) = (*this)(1, 0) * rhs(0, 0) + (*this)(1, 1) * rhs(1, 0) + (*this)(1, 2) * rhs(2, 0);
+	result(1, 1) = (*this)(1, 0) * rhs(0, 1) + (*this)(1, 1) * rhs(1, 1) + (*this)(1, 2) * rhs(2, 1);
+	result(1, 2) = (*this)(1, 0) * rhs(0, 2) + (*this)(1, 1) * rhs(1, 2) + (*this)(1, 2) * rhs(2, 2);
+
+	result(2, 0) = (*this)(2, 0) * rhs(0, 0) + (*this)(2, 1) * rhs(1, 0) + (*this)(2, 2) * rhs(2, 0);
+	result(2, 1) = (*this)(2, 0) * rhs(0, 1) + (*this)(2, 1) * rhs(1, 1) + (*this)(2, 2) * rhs(2, 1);
+	result(2, 2) = (*this)(2, 0) * rhs(0, 2) + (*this)(2, 1) * rhs(1, 2) + (*this)(2, 2) * rhs(2, 2);
+
+	return result;
+}
+
+Matrix3d geocore::Matrix3d::Transpose() const
+{
+	Matrix3d result;
+
+	result(0, 0) = (*this)(0, 0);
+	result(0, 1) = (*this)(1, 0);
+	result(0, 2) = (*this)(2, 0);
+
+	result(1, 0) = (*this)(0, 1);
+	result(1, 1) = (*this)(1, 1);
+	result(1, 2) = (*this)(2, 1);
+
+	result(2, 0) = (*this)(0, 2);
+	result(2, 1) = (*this)(1, 2);
+	result(2, 2) = (*this)(2, 2);
+
+	return result;
+}
+
+double geocore::Matrix3d::Determinant() const
+{
+//det (A) = a(ei-fh) - b(di-fg) + c(dh-eg)
+	return
+		(*this)(0, 0) *
+		((*this)(1, 1) * (*this)(2, 2) - (*this)(1, 2) * (*this)(2, 1)) -
+
+		(*this)(0, 1) *
+		((*this)(1, 0) * (*this)(2, 2) - (*this)(1, 2) * (*this)(2, 0)) +
+
+		(*this)(0, 2) *
+		((*this)(1, 0) * (*this)(2, 1) - (*this)(1, 1) * (*this)(2, 0));
+}
+
+Matrix3d geocore::Matrix3d::Identity()
+{
+	return Matrix3d(
+		1.0, 0.0, 0.0,
+		0.0, 1.0, 0.0,
+		0.0, 0.0, 1.0);
 }
 
 

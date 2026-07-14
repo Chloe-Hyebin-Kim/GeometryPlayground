@@ -22,6 +22,12 @@ namespace geocore
 		Matrix2d operator/(double scalar)const;
 
 
+		Matrix2d operator*(const Matrix2d& rhs) const;
+
+		Matrix2d Transpose() const;
+		double Determinant() const;
+
+		Matrix2d Identity();
 
 	};
 
@@ -45,6 +51,12 @@ namespace geocore
 		Matrix3d operator/(double scalar)const;
 
 
+		Matrix3d operator*(const Matrix3d& rhs) const;
+
+		Matrix3d Transpose() const;
+		double Determinant() const;
+
+		Matrix3d Identity();
 
 	};
 }
