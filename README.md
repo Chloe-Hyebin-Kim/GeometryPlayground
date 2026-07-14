@@ -1,10 +1,12 @@
 # Geometry Playground
 
 ## Project Goal
-외부 라이브러리에 의존하지 않고 
-**컴퓨터 비전(Computer Vision), 3D Geometry, Camera Calibration, 3D Reconstruction, Photometric Stereo** 등을 직접 구현하는 것을 목표로 하는 프로젝트. <br>
+외부 라이브러리에 의존하지 않고 <br>
+**컴퓨터 비전(Computer Vision), 3D Geometry, Camera Calibration, 3D Reconstruction, Photometric Stereo** 등을 <br>
+직접 구현하는 것을 목표로 하는 프로젝트. <br>
+
 <br>
-최종 목표
+최종 목표!!
 
 - Math &Geometry Library (Vector, Matrix, Quaternion, Rotation, Transform, Plane, Ray ...)
 - Camera Model
@@ -14,11 +16,11 @@
 
 ---
 
-# Current Progress
+## Current Progress
 
-## Project Structure
+### Project Structure
 
-```
+```text
 GeometryPlayground
 │
 ├── Geometry.Core
@@ -34,112 +36,19 @@ GeometryPlayground
 └── Geometry.Demo
 ```
 
----
+## Implemented
 
-# Implemented
+### Math
 
-## Math
+- Vec2d
+- Vec3d
+- Mat2d
+- Mat3d
+- Mat4d
 
-### Vec2d
+Implemented Features
 
-Implemented
-
-- Constructors
-- operator[]
-- operator+
-- operator-
-- Scalar multiplication
-- Scalar division
-- Dot Product
-- Norm
-- Normalize
-
----
-
-### Vec3d
-
-Implemented
-
-- Constructors
-- operator[]
-- operator+
-- operator-
-- Scalar multiplication
-- Scalar division
-- Dot Product
-- Cross Product
-- Norm
-- Normalize
-
----
-
-### Mat2d
-
-Implemented
-
-- Constructors
-- operator()
-- operator[]
-- Matrix Addition
-- Matrix Subtraction
-- Scalar Multiplication
-- Scalar Division
-- Matrix Multiplication
-- Transpose
-- Determinant
-- Inverse
-- Identity
-- IsApprox
-
-
----
-
-### Mat3d
-
-Implemented
-
-- Constructors
-- operator()
-- operator[]
-- Matrix Addition
-- Matrix Subtraction
-- Scalar Multiplication
-- Scalar Division
-- Matrix Multiplication
-- Matrix × Vector
-- Transpose
-- Determinant
-- Cofactor Matrix
-- Adjugate Matrix
-- Inverse
-- Identity
-- IsApprox
-
-Inverse implemented through
-
-```
-Determinant
-      ↓
-Cofactor Matrix
-      ↓
-Adjugate Matrix
-      ↓
-Inverse
-```
-
----
-
-### Mat4d
-
-Implemented
-
-- Constructors
-- operator()
-- operator[]
-- Matrix Addition
-- Matrix Subtraction
-- Scalar Multiplication
-- Scalar Division
+- Matrix / Vector Arithmetic
 - Matrix Multiplication
 - Transpose
 - Determinant
@@ -149,56 +58,24 @@ Implemented
 - Identity
 - IsApprox
 
----
+### Geometry
 
-# Geometry
-
-## Rotation
+#### Rotation
 
 Implemented
 
-### Rodrigues Formula
+- Rodrigues Formula
+- Skew Symmetric Matrix
+- Rotation Matrix Validation
 
-```
-R = I + sinθ K + (1-cosθ)K²
-```
+Verified using
 
-where
-
-```
-K =
-[  0   -z    y ]
-[  z    0   -x ]
-[ -y    x    0 ]
-```
-
-Implemented
-
-- Rodrigues()
-- Skew()
-- IsRotationMatrix()
-
-Verification
-
-```
+```text
 RᵀR = I
-det(R)=1
+det(R) = 1
 ```
 
----
-
-## Transform
-
-Implemented
-
-Transformation Matrix
-
-```
-[ R11 R12 R13 tx ]
-[ R21 R22 R23 ty ]
-[ R31 R32 R33 tz ]
-[  0   0   0  1 ]
-```
+#### Transform
 
 Implemented
 
@@ -208,60 +85,42 @@ Implemented
 - FromRotationTranslation
 - Inverse
 
-Inverse implemented as
+Transformation Matrix
 
+```text
+[ R11 R12 R13 tx ]
+[ R21 R22 R23 ty ]
+[ R31 R32 R33 tz ]
+[  0   0   0  1 ]
 ```
-T⁻¹
 
+Inverse Transformation
+
+```text
 [ Rᵀ  -Rᵀt ]
-[ 0      1 ]
+[  0     1 ]
 ```
 
----
+## Demo
 
-# Demo
-
-Implemented demo program for
+Implemented demo programs for
 
 - Rodrigues Rotation
 - Rotation Matrix Verification
 - Transformation Matrix
 - Inverse Transformation
-- Identity Verification
 
----
+Verified using
 
-# Verified
-
-Verified
-
-- Matrix Multiplication
-- Determinant
-- Inverse
-- Rodrigues Rotation
-- Rotation Matrix Validation
-- Transformation Matrix
-- Inverse Transformation
-
-using
-
-```
+```text
 T × T⁻¹ = I
 ```
 
-and
-
-```
-RᵀR = I
-```
-
 ---
 
-# Next Step
+## Next Step
 
-Planned implementation order
-
-```
+```text
 Camera
     ↓
 Calibration Toolkit
