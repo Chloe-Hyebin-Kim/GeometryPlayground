@@ -2,33 +2,35 @@
 //
 #include "pch.h"
 
-
 #include "Rotation.h"
+#include "Transform.h"
+
+#include "Utils.h"
+using namespace geocore;
 
 int main()
 {
-	constexpr double pi = 3.14159265358979323846;
+	Vec3d axis(0.0, 0.0, 1.0);
+	Vec3d translation(10.0, 20.0, 30.0);
 
-	Eigen::Vector3d axis(0.0, 0.0, 1.0);
+	Mat3d R = Rodrigues(axis, 90.0);
 
-	double angle = 90.0 * pi / 180.0;
+	Mat4d T = Transform::FromRotationTranslation(R,translation);
 
-	Eigen::Matrix3d R = geocore::Rodrigues(axis, angle);
+	Mat4d inverseT = Transform::Inverse(T);
 
-	Eigen::Vector3d point(1.0, 0.0, 0.0);
+	Mat4d result = T * inverseT;
 
-	Eigen::Vector3d rotatedPoint = R * point;
+	std::cout << "Transform T\n";
+	PrintMatrix4d(T);
 
-	cout << "Rotation Matrix\n";
-	cout << R << "\n\n";
+	std::cout << "\nInverse T\n";
+	PrintMatrix4d(inverseT);
 
-	cout << "Original Point\n";
-	cout << point.transpose() << "\n\n";
+	std::cout << "\nT * Inverse(T)\n";
+	PrintMatrix4d(result);
 
-	cout << "Rotated Point\n";
-	cout << rotatedPoint.transpose() << "\n\n";
-
-	cout << "Is Rotation Matrix: " << boolalpha << geocore::IsRotationMatrix(R)<< endl;
+	std::cout << "\nIs Identity: "<< std::boolalpha << result.IsApprox(Mat4d::Identity(), 1e-9) << '\n';
 
 	return 0;
 }

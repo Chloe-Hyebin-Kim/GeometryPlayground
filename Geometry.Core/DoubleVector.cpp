@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "DoubleVector.h"
 
+#include "DoubleMatrix.h"
 using namespace geocore;
 
 

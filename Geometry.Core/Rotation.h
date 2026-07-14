@@ -1,16 +1,16 @@
 #ifndef ROTATION_H
 #define ROTATION_H
 
-#include <Eigen/Core>
+//#include <Eigen/Core>
 
 namespace geocore
 {
-	Eigen::Matrix3d Rodrigues(const Eigen::Vector3d& axis,double angle);
+	Mat3d Rodrigues(const Vec3d& axis,double angle);
 
 	//3차원 벡터의 외적을 행렬곱으로 표현
-	Eigen::Matrix3d Skew(const Eigen::Vector3d& v);
+	Mat3d Skew(const Vec3d& v);
 
-	bool IsRotationMatrix(const Eigen::Matrix3d& R);
+	bool IsRotationMatrix(const Mat3d& R);
 
 }
 #endif //  ROTATION_H

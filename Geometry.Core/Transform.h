@@ -1,7 +1,7 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
 
-#include <Eigen/Core>
+//#include <Eigen/Core>
 
 namespace geocore
 {
@@ -9,11 +9,11 @@ namespace geocore
 	{
 	public:
 
-		static Eigen::Matrix4d Identity();
-		static Eigen::Matrix4d Translate(const Eigen::Vector3d& t);
-		static Eigen::Matrix4d Rotate(const Eigen::Matrix3d& R);
-		static Eigen::Matrix4d FromRotationTranslation(const Eigen::Matrix3d& R, const Eigen::Vector3d& t);
-		static Eigen::Matrix4d Inverse(const Eigen::Matrix4d& T);
+		static Mat4d Identity();
+		static Mat4d Translate(const Vec3d& t);
+		static Mat4d Rotate(const Mat3d& R);
+		static Mat4d FromRotationTranslation(const Mat3d& R, const Vec3d& t);
+		static Mat4d Inverse(const Mat4d& T);
 	};
 }
 
