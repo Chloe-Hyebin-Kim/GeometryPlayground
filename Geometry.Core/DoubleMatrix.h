@@ -28,7 +28,7 @@ namespace geocore
 		double Determinant() const;
 
 		Matrix2d Identity();
-
+		Matrix2d Inverse() const;
 	};
 
 
@@ -57,7 +57,9 @@ namespace geocore
 		double Determinant() const;
 
 		Matrix3d Identity();
-
+		Matrix3d CofactorMatrix() const;
+		Matrix3d AdjugateMatrix() const;
+		Matrix3d Inverse() const;
 	};
 }
 

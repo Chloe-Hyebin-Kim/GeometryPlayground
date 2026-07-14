@@ -114,7 +114,7 @@ Matrix2d geocore::Matrix2d::Transpose() const
 	result(0, 0) = (*this)(0, 0);
 	result(0, 1) = (*this)(1, 0);
 	result(1, 0) = (*this)(0, 1);
-	result(1, 1) = (*this)(1, 0);
+	result(1, 1) = (*this)(1, 1);
 
 	return result;
 }
@@ -127,6 +127,22 @@ double geocore::Matrix2d::Determinant() const
 Matrix2d geocore::Matrix2d::Identity()
 {
 	return Matrix2d(1.0, 0.0, 0.0, 1.0);
+}
+
+Matrix2d geocore::Matrix2d::Inverse() const
+{
+	const double det = Determinant();
+
+	if (std::abs(det) < 1e-12)
+	{
+		throw std::runtime_error("Matrix2d is singular and cannot be inverted.");
+	}	
+	
+	return Matrix2d(
+		(*this)(1, 1) / det,
+		-(*this)(0, 1) / det,
+		-(*this)(1, 0) / det,
+		(*this)(0, 0) / det);
 }
 
 
@@ -302,16 +318,25 @@ Matrix3d geocore::Matrix3d::Transpose() const
 
 double geocore::Matrix3d::Determinant() const
 {
-//det (A) = a(ei-fh) - b(di-fg) + c(dh-eg)
-	return
-		(*this)(0, 0) *
-		((*this)(1, 1) * (*this)(2, 2) - (*this)(1, 2) * (*this)(2, 1)) -
+	const double m00 = (*this)(0, 0);
+	const double m01 = (*this)(0, 1);
+	const double m02 = (*this)(0, 2);
 
-		(*this)(0, 1) *
-		((*this)(1, 0) * (*this)(2, 2) - (*this)(1, 2) * (*this)(2, 0)) +
+	const double m10 = (*this)(1, 0);
+	const double m11 = (*this)(1, 1);
+	const double m12 = (*this)(1, 2);
 
-		(*this)(0, 2) *
-		((*this)(1, 0) * (*this)(2, 1) - (*this)(1, 1) * (*this)(2, 0));
+	const double m20 = (*this)(2, 0);
+	const double m21 = (*this)(2, 1);
+	const double m22 = (*this)(2, 2);
+
+	//det (A) = a(ei-fh) - b(di-fg) + c(dh-eg)
+
+	double det =  m00 * (m11 * m22 - m12 * m21)
+				- m01 * (m10 * m22 - m12 * m20)
+				+ m02 * (m10 * m21 - m11 * m20);
+
+	return det;
 }
 
 Matrix3d geocore::Matrix3d::Identity()
@@ -320,6 +345,76 @@ Matrix3d geocore::Matrix3d::Identity()
 		1.0, 0.0, 0.0,
 		0.0, 1.0, 0.0,
 		0.0, 0.0, 1.0);
+}
+
+Matrix3d geocore::Matrix3d::CofactorMatrix() const
+{
+	//  CofactorMatrix(A)
+	//
+	//  C = [ +(m11*m22 - m12*m21)   -(m10*m22 - m12*m20)   +(m10*m21 - m11*m20) ]
+	//      [ -(m01*m22 - m02*m21)   +(m00*m22 - m02*m20)   -(m00*m21 - m01*m20) ]
+	//      [ +(m01*m12 - m02*m11)   -(m00*m12 - m02*m10)   +(m00*m11 - m01*m10) ]
+	//
+	const double m00 = (*this)(0, 0);
+	const double m01 = (*this)(0, 1);
+	const double m02 = (*this)(0, 2);
+
+	const double m10 = (*this)(1, 0);
+	const double m11 = (*this)(1, 1);
+	const double m12 = (*this)(1, 2);
+
+	const double m20 = (*this)(2, 0);
+	const double m21 = (*this)(2, 1);
+	const double m22 = (*this)(2, 2);
+
+	Matrix3d result;
+
+	result(0, 0) = +(m11 * m22 - m12 * m21);
+	result(0, 1) = -(m10 * m22 - m12 * m20);
+	result(0, 2) = +(m10 * m21 - m11 * m20);
+
+	result(1, 0) = -(m01 * m22 - m02 * m21);
+	result(1, 1) = +(m00 * m22 - m02 * m20);
+	result(1, 2) = -(m00 * m21 - m01 * m20);
+
+	result(2, 0) = +(m01 * m12 - m02 * m11);
+	result(2, 1) = -(m00 * m12 - m02 * m10);
+	result(2, 2) = +(m00 * m11 - m01 * m10);
+	
+	return result;
+}
+
+Matrix3d geocore::Matrix3d::AdjugateMatrix() const
+{
+	return CofactorMatrix().Transpose();
+}
+
+Matrix3d geocore::Matrix3d::Inverse() const
+{
+	//  A = [ m00  m01  m02 ]
+	//      [ m10  m11  m12 ]
+	//      [ m20  m21  m22 ]
+	//
+	//  det(A)
+	//  = m00 * (m11 * m22 - m12 * m21)
+	//  - m01 * (m10 * m22 - m12 * m20)
+	//  + m02 * (m10 * m21 - m11 * m20)
+	//
+	//              1
+	//  A^(-1) = -------* AdjugateMatrix
+	//            det(A)
+	//
+	
+	const double det = Determinant();
+
+	if (std::abs(det) < 1e-12)
+	{
+		throw std::runtime_error("Matrix3d is singular and cannot be inverted.");
+	}
+	
+	Matrix3d Adj = AdjugateMatrix();
+	
+	return (Adj / det);
 }
 
 
