@@ -1,129 +1,272 @@
 # Geometry Playground
 
-### 컴퓨터비전에서 사용하는 모든 기하학을 직접 구현해보기
-<img width="776" height="535" alt="image" src="https://github.com/user-attachments/assets/b03a58dd-67bf-440d-8a66-4e857586474d" />
-
+## Project Goal
+외부 라이브러리에 의존하지 않고 
+**컴퓨터 비전(Computer Vision), 3D Geometry, Camera Calibration, 3D Reconstruction, Photometric Stereo** 등을 직접 구현하는 것을 목표로 하는 프로젝트. <br>
 <br>
-<br>
+최종 목표
 
-Eigen3.4.1 설치 필요 <br>
+- Math &Geometry Library (Vector, Matrix, Quaternion, Rotation, Transform, Plane, Ray ...)
+- Camera Model
+- Calibration Toolkit
+- 3D Reconstruction Pipeline
+- Photometric Stereo
 
-pch.h : `using namespace std;` , `C++ SLT` , `Eigen` 헤더 포함. <br>
-헤더(.h): `using namespace` 사용하지 않음. `pch.h` 넣지 않고 필요한 것만 넣음<br>
-소스(.cpp): `using namespace geometry;` 사용.<br>
-Demo 및 테스트 코드: `using namespace geometry;`와 `using namespace Eigen;` 사용.<br>
-<br>
+---
 
+# Current Progress
+
+## Project Structure
 
 ```
 GeometryPlayground
 │
 ├── Geometry.Core
-│      Matrix
-│      Vector
-│      Rotation
+│   ├── Math
+│   │   ├── DoubleVector
+│   │   ├── DoubleMatrix
+│   │   └── Utils
+│   │
+│   └── Geometry
+│       ├── Rotation
+│       └── Transform
 │
-├── Geometry.Camera
-│      Projection
-│      Calibration
-│
-├── Geometry.Demo
-│      실행 프로그램
-│
-├── Geometry.Test
-│      테스트
-│
-└── ThirdParty
-        Eigen
+└── Geometry.Demo
 ```
-
-<br>
-<br>
 
 ---
 
-<br>
-<br>
+# Implemented
+
+## Math
+
+### Vec2d
+
+Implemented
+
+- Constructors
+- operator[]
+- operator+
+- operator-
+- Scalar multiplication
+- Scalar division
+- Dot Product
+- Norm
+- Normalize
+
+---
+
+### Vec3d
+
+Implemented
+
+- Constructors
+- operator[]
+- operator+
+- operator-
+- Scalar multiplication
+- Scalar division
+- Dot Product
+- Cross Product
+- Norm
+- Normalize
+
+---
+
+### Mat2d
+
+Implemented
+
+- Constructors
+- operator()
+- operator[]
+- Matrix Addition
+- Matrix Subtraction
+- Scalar Multiplication
+- Scalar Division
+- Matrix Multiplication
+- Transpose
+- Determinant
+- Inverse
+- Identity
+- IsApprox
 
 
-## C++ Geometry and Camera Calibration Toolkit
+---
 
+### Mat3d
 
-#### 1단계: Geometry Playground
+Implemented
 
-가장 먼저 구현할 프로젝트입니다.
+- Constructors
+- operator()
+- operator[]
+- Matrix Addition
+- Matrix Subtraction
+- Scalar Multiplication
+- Scalar Division
+- Matrix Multiplication
+- Matrix × Vector
+- Transpose
+- Determinant
+- Cofactor Matrix
+- Adjugate Matrix
+- Inverse
+- Identity
+- IsApprox
+
+Inverse implemented through
+
 ```
-geometry/
-├─ Transform2D
-├─ Transform3D
-├─ RotationMatrix
-├─ EulerAngles
-├─ Rodrigues
-├─ Quaternion
-├─ Homography
-├─ Projection
-├─ Triangulation
-└─ RANSAC
+Determinant
+      ↓
+Cofactor Matrix
+      ↓
+Adjugate Matrix
+      ↓
+Inverse
 ```
 
+---
 
-#### 2단계: Camera Calibration Toolkit
+### Mat4d
 
-Geometry 모듈 위에 캘리브레이션을 구현합니다.
+Implemented
+
+- Constructors
+- operator()
+- operator[]
+- Matrix Addition
+- Matrix Subtraction
+- Scalar Multiplication
+- Scalar Division
+- Matrix Multiplication
+- Transpose
+- Determinant
+- Cofactor Matrix
+- Adjugate Matrix
+- Inverse
+- Identity
+- IsApprox
+
+---
+
+# Geometry
+
+## Rotation
+
+Implemented
+
+### Rodrigues Formula
+
 ```
-calibration/
-├─ ChessboardDetector
-├─ HomographyEstimator
-├─ ZhangInitializer
-├─ DistortionModel
-├─ ReprojectionError
-├─ CameraPoseEstimator
-└─ CalibrationOptimizer
+R = I + sinθ K + (1-cosθ)K²
 ```
-구현 순서는 다음이 좋습니다.
 
-  1. 체스보드 코너 검출
-  2. Subpixel refinement
-  3. 영상별 Homography 계산
-  4. Zhang 방법으로 내부 파라미터 초기화
-  5. 외부 파라미터 복원
-  6. 왜곡계수 추정
-  7. Reprojection error 계산
-  8. 비선형 최적화
-  9. cv::calibrateCamera()와 비교
+where
 
-최적화는 처음에는 직접 Gauss-Newton을 구현하고, 이후 Ceres Solver를 붙이는 방식이 좋습니다.
-
-#### 3단계: Photometric Stereo
-
-앞의 수학 모듈을 활용해 표면 법선을 복원합니다.
 ```
-photometric/
-├─ LightCalibrator
-├─ LambertianSolver
-├─ NormalEstimator
-├─ AlbedoEstimator
-├─ ShadowMask
-├─ DepthIntegrator
-└─ MeshExporter
+K =
+[  0   -z    y ]
+[  z    0   -x ]
+[ -y    x    0 ]
 ```
-기본 모델은 픽셀별로 다음 선형식을 풉니다.
-$i = Lg,\quad g = \rho n$
 
-초기 버전에서는 다음 조건만 다루면 됩니다.
+Implemented
 
-고정된 카메라
-알려진 평행광 방향
-Lambertian 표면
-흑백 이미지
-그림자와 포화 영역 제외
+- Rodrigues()
+- Skew()
+- IsRotationMatrix()
 
-이후 확장합니다.
+Verification
 
-Robust least squares
-Shadow detection
-Specular rejection
-Unknown light estimation
-Poisson depth integration
-OBJ mesh export
+```
+RᵀR = I
+det(R)=1
+```
 
+---
+
+## Transform
+
+Implemented
+
+Transformation Matrix
+
+```
+[ R11 R12 R13 tx ]
+[ R21 R22 R23 ty ]
+[ R31 R32 R33 tz ]
+[  0   0   0  1 ]
+```
+
+Implemented
+
+- Identity
+- Translate
+- Rotate
+- FromRotationTranslation
+- Inverse
+
+Inverse implemented as
+
+```
+T⁻¹
+
+[ Rᵀ  -Rᵀt ]
+[ 0      1 ]
+```
+
+---
+
+# Demo
+
+Implemented demo program for
+
+- Rodrigues Rotation
+- Rotation Matrix Verification
+- Transformation Matrix
+- Inverse Transformation
+- Identity Verification
+
+---
+
+# Verified
+
+Verified
+
+- Matrix Multiplication
+- Determinant
+- Inverse
+- Rodrigues Rotation
+- Rotation Matrix Validation
+- Transformation Matrix
+- Inverse Transformation
+
+using
+
+```
+T × T⁻¹ = I
+```
+
+and
+
+```
+RᵀR = I
+```
+
+---
+
+# Next Step
+
+Planned implementation order
+
+```
+Camera
+    ↓
+Calibration Toolkit
+    ↓
+3D Reconstruction Pipeline
+    ↓
+Photometric Stereo
+```
