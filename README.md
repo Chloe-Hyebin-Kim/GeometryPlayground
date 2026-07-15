@@ -9,11 +9,32 @@
 최종 목표!!
 
 - Math &Geometry Library (Vector, Matrix, Quaternion, Rotation, Transform, Plane, Ray ...)
-- Camera Model
 - Calibration Toolkit
+- OpticalFlow Library
 - 3D Reconstruction Pipeline
-- Photometric Stereo
 
+```
+ComputerVisionPortfolio/
+├─ GeometryPlayground/    <-해당
+│  └─ Geometry.Core/
+│  └─ ...
+│
+├─ CameraCalibrationToolkit/
+│  ├─ CameraCalibrationToolkit.sln
+│  └─ Calibration.Core/
+│  └─ ...
+│
+└─ OpticalFlowLibrary/
+│  ├─ OpticalFlowLibrary.sln
+│  └─ OpticalFlow.Core/
+│  └─ ...
+│
+└─ 3DReconstructionPipeline/
+   ├─ 3DReconstruction.sln
+   └─ 3DReconstruction.Core/
+   └─ ...
+
+```
 ---
 
 ## Current Progress
@@ -34,6 +55,37 @@ GeometryPlayground
 │       └── Transform
 │
 └── Geometry.Demo
+
+
+
+GeometryPlayground
+├─ Math
+│  ├─ Vector              <- 작업 완료
+│  ├─ Matrix              <- 작업 완료
+│  ├─ SVD                 <- 작업 예정
+│  ├─ LeastSquares        <- 작업 예정
+│  └─ Utils               <- 작업 중
+│
+├─ Geometry
+│  ├─ Rotation            <- 작업 중
+│  ├─ Quaternion          <- 작업 중
+│  ├─ Transform           <- 작업 중
+│  ├─ Plane               <- 작업 예정
+│  ├─ Ray                 <- 작업 예정
+│  └─ Line                <- 작업 예정
+│
+├─ ProjectiveGeometry
+│  ├─ HomogeneousCoordinate
+│  ├─ Projection
+│  ├─ Homography
+│  └─ Triangulation
+│
+├─ Optimization
+│  ├─ GaussNewton
+│  ├─ LevenbergMarquardt
+│  └─ RANSAC
+│
+└─ Demo
 ```
 
 ## Implemented
