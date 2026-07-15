@@ -46,6 +46,9 @@
     <ClInclude Include="DoubleMatrix.h">
       <Filter>Math\HeaderFiles</Filter>
     </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>Geometry\HeaderFiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rotation.cpp">
@@ -64,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="DoubleMatrix.cpp">
       <Filter>Math\SourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
+      <Filter>Geometry\SourceFiles</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
