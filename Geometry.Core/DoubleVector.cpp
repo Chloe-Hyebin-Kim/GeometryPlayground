@@ -15,6 +15,11 @@ Vec2d::Vec2d(double x, double y) : f64X(x), f64Y(y)
 {
 }
 
+Vec2d geocore::Vec2d::operator=(const Vec2d& rhs) const
+{
+	return Vec2d(rhs.f64X, rhs.f64Y);
+}
+
 Vec2d Vec2d::operator+(const Vec2d& rhs) const
 {
 	return Vec2d(f64X + rhs.f64X, f64Y + rhs.f64Y);
@@ -104,6 +109,11 @@ Vec3d::Vec3d() : f64X(0.0), f64Y(0.0), f64Z(0.0)
 
 Vec3d::Vec3d(double x, double y, double z) : f64X(x), f64Y(y), f64Z(z)
 {
+}
+
+Vec3d geocore::Vec3d::operator=(const Vec3d& rhs) const
+{
+	return Vec3d(rhs.f64X, rhs.f64Y, rhs.f64Z);
 }
 
 Vec3d Vec3d::operator+(const Vec3d& rhs) const

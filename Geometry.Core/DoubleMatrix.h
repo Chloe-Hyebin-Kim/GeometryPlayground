@@ -16,6 +16,7 @@ namespace geocore
 		const double& operator[](int index) const;
 		const double& operator()(int row, int col) const;
 
+		Mat2d operator=(const Mat2d& rhs)const;
 		Mat2d operator+(const Mat2d& rhs)const;
 		Mat2d operator-(const Mat2d& rhs)const;
 		Mat2d operator*(double scalar)const;
@@ -46,6 +47,7 @@ namespace geocore
 		const double& operator[](int index) const;
 		const double& operator()(int row, int col) const;
 
+		Mat3d operator=(const Mat3d& rhs)const;
 		Mat3d operator+(const Mat3d& rhs)const;
 		Mat3d operator-(const Mat3d& rhs)const;
 		Mat3d operator*(double scalar)const;
@@ -79,6 +81,7 @@ namespace geocore
 		const double& operator[](int index) const;
 		const double& operator()(int row, int col) const;
 
+		Mat4d operator=(const Mat4d& rhs)const;
 		Mat4d operator+(const Mat4d& rhs)const;
 		Mat4d operator-(const Mat4d& rhs)const;
 		Mat4d operator*(double scalar)const;

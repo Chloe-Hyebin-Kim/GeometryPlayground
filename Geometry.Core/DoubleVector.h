@@ -11,6 +11,7 @@ namespace geocore
 		Vec2d();
 		Vec2d(double x, double y);
 
+		Vec2d operator=(const Vec2d& rhs)const;
 		Vec2d operator+(const Vec2d& rhs)const;
 		Vec2d operator-(const Vec2d& rhs)const;
 		Vec2d operator*(double scalar)const;
@@ -38,6 +39,7 @@ namespace geocore
 		Vec3d();
 		Vec3d(double x, double y, double z);
 
+		Vec3d operator=(const Vec3d& rhs)const;
 		Vec3d operator+(const Vec3d& rhs)const;
 		Vec3d operator-(const Vec3d& rhs)const;
 		Vec3d operator*(double scalar)const;

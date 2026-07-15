@@ -42,6 +42,18 @@ const double& geocore::Mat2d::operator()(int row, int col) const
 	return m[row * 2 + col];
 }
 
+Mat2d geocore::Mat2d::operator=(const Mat2d& rhs) const
+{
+	Mat2d result;
+	result.m[0] = m[0] + rhs.m[0];
+	result.m[1] = m[1] + rhs.m[1];
+	result.m[2] = m[2] + rhs.m[2];
+	result.m[3] = m[3] + rhs.m[3];
+
+
+	return result;
+}
+
 Mat2d geocore::Mat2d::operator+(const Mat2d& rhs) const
 {
 	Mat2d result;
@@ -218,6 +230,25 @@ const double& geocore::Mat3d::operator[](int index) const
 const double& geocore::Mat3d::operator()(int row, int col) const
 {
 	return m[row * 3 + col];
+}
+
+Mat3d geocore::Mat3d::operator=(const Mat3d& rhs) const
+{
+	Mat3d result;
+
+	result[0] = rhs.m[0];
+	result[1] = rhs.m[1];
+	result[2] = rhs.m[2];
+
+	result[3] = rhs.m[3];
+	result[4] = rhs.m[4];
+	result[5] = rhs.m[5];
+
+	result[6] = rhs.m[6];
+	result[7] = rhs.m[7];
+	result[8] = rhs.m[8];
+
+	return result;
 }
 
 Mat3d geocore::Mat3d::operator+(const Mat3d& rhs) const
@@ -540,6 +571,35 @@ const double& geocore::Mat4d::operator[](int index) const
 const double& geocore::Mat4d::operator()(int row, int col) const
 {
 	return m[row * 4 + col];
+}
+
+Mat4d geocore::Mat4d::operator=(const Mat4d& rhs) const
+{
+	Mat4d result;
+
+	result[0] = rhs.m[0];
+	result[1] = rhs.m[1];
+	result[2] = rhs.m[2];
+	result[3] = rhs.m[3];
+
+	result[4] = rhs.m[4];
+	result[5] = rhs.m[5];
+	result[6] = rhs.m[6];
+	result[7] = rhs.m[7];
+
+	result[8] = rhs.m[8];
+	result[9] = rhs.m[9];
+	result[10] = rhs.m[10];
+	result[11] = rhs.m[11];
+
+	result[12] = rhs.m[12];
+	result[13] = rhs.m[13];
+	result[14] = rhs.m[14];
+	result[15] = rhs.m[15];
+
+
+	//for (int i = 0; i < 16; ++i)	result.m[i] = rhs.m[i];
+	return result;
 }
 
 Mat4d geocore::Mat4d::operator+(const Mat4d& rhs) const
