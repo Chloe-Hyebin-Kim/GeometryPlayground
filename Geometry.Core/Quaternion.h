@@ -17,6 +17,7 @@ namespace geocore
 		Quaternion(double w, double x, double y, double z);
 		
 		// Arithmetic
+		Quaternion operator*(const Quaternion& rhs) const;
 		Quaternion operator*(double scalar) const;
 		Quaternion operator/(double scalar) const;
 
@@ -28,6 +29,7 @@ namespace geocore
 		// Quaternion Operations
 		Quaternion Conjugate() const;
 		Quaternion Inverse() const;
+
 	};
 
 
