@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Quaternion.h"
+#include "Utils.h"
 
 using namespace geocore;
 
@@ -17,6 +18,14 @@ geocore::Quaternion::Quaternion(double w, double x, double y, double z)
 	f64X = x;
 	f64Y = y;
 	f64Z = z;
+}
+
+geocore::Quaternion::Quaternion(double w, Vec3d v)
+{
+	f64W = w;
+	f64X = v.f64X;
+	f64Y = v.f64Y;
+	f64Z = v.f64Z;
 }
 
 Quaternion geocore::Quaternion::operator*(const Quaternion& rhs) const
@@ -93,10 +102,56 @@ Quaternion geocore::Quaternion::Normalized() const
 
 Quaternion geocore::Quaternion::Conjugate() const
 {
+	//ÄÓ·¹ 
 	return Quaternion(f64W, -f64X, -f64Y, -f64Z);
 }
 
 Quaternion geocore::Quaternion::Inverse() const
 {
 	return Conjugate() / SquaredNorm(); 
+}
+
+Quaternion Quaternion::Identity()
+{
+	return Quaternion(1.0, 0.0, 0.0, 0.0);
+}
+
+Vec3d geocore::Quaternion::Rotate(const Vec3d& v) const
+{
+	Quaternion p(0.0,v);
+	Quaternion result =(*this)*p*Inverse();
+
+	return Vec3d(result.f64X, result.f64Y, result.f64Z);
+}
+
+Mat3d geocore::Quaternion::ToRotationMatrix() const
+{
+	//		[1 - 2(y©÷ + z©÷)		2(xy - wz)		2(xz + wy)]
+	//R =	[2(xy + wz)		1 - 2(x©÷ + z©÷)		2(yz - wx)]
+	//		[2(xz - wy)		2(yz + wx)		1 - 2(x©÷ + y©÷)]
+
+
+	return Mat3d();
+}
+
+
+Quaternion geocore::Quaternion::FromAxisAngle(const Vec3d& axis, double angleDegree)
+{
+	// axis : È¸ÀüÃà (´ÜÀ§º¤ÅÍ)
+	// angle : degree
+	// q = ( cos(theta/2),  axis*sin(theta/2) )
+
+	Vec3d n = axis.Normalized();
+	double rad = geocore::DegToRad(angleDegree);
+	double half = rad * 0.5;
+
+	return Quaternion(cos(half), axis* sin(half) );
+}
+
+Quaternion geocore::Quaternion::FromRotationMatrix(const Mat3d& R)
+{
+//trace = R00 + R11 + R22
+
+
+	return Quaternion();
 }

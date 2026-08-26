@@ -15,6 +15,7 @@ namespace geocore
 
 		Quaternion();
 		Quaternion(double w, double x, double y, double z);
+		Quaternion(double w, Vec3d v);
 		
 		// Arithmetic
 		Quaternion operator*(const Quaternion& rhs) const;
@@ -30,6 +31,12 @@ namespace geocore
 		Quaternion Conjugate() const;
 		Quaternion Inverse() const;
 
+		static Quaternion Identity();
+
+		static Quaternion FromAxisAngle(const Vec3d& axis, double angleDegree);
+		Mat3d ToRotationMatrix() const;
+		Vec3d Rotate(const Vec3d& v) const;
+		static Quaternion FromRotationMatrix(const Mat3d& R);
 	};
 
 
